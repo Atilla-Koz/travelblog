@@ -1,8 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useLanguage } from '../../context/LanguageContext';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { t } = useLanguage();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,13 +24,13 @@ const Navbar = () => {
             <Link to="/about" className={`font-medium tracking-wide ${
               isScrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white hover:text-gray-200'
             }`}>
-              ABOUT
+              {t('nav.about')}
             </Link>
             
             <Link to="/explore" className={`font-medium tracking-wide ${
               isScrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white hover:text-gray-200'
             }`}>
-              EXPLORE
+              {t('nav.explore')}
             </Link>
 
             <Link to="/" className="flex items-center">
@@ -45,14 +47,14 @@ const Navbar = () => {
             <Link to="/journal" className={`font-medium tracking-wide ${
               isScrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white hover:text-gray-200'
             }`}>
-              JOURNAL
+              {t('nav.journal')}
             </Link>
 
             <button className={`font-medium tracking-wide ${
               isScrolled ? 'text-gray-700 hover:text-gray-900' : 'text-white hover:text-gray-200'
             }`}>
               <div className="flex items-center space-x-1">
-                <span>SEARCH</span>
+                <span>{t('nav.search')}</span>
                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
