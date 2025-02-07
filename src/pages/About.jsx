@@ -30,31 +30,48 @@ const About = () => {
 
       {/* Intro Section */}
       <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="prose prose-lg mx-auto">
-            <h2 className="text-4xl font-serif mb-8 text-center">{t('about.intro.title')}</h2>
-            <p className="text-gray-600 text-lg leading-relaxed mb-8">
-              {t('about.intro.description')}
-            </p>
-            <p className="text-gray-600 text-lg leading-relaxed">
-              {t('about.intro.tech')}
-            </p>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="prose prose-lg">
+              <h2 className="text-4xl font-serif mb-8">{t('about.intro.title')}</h2>
+              <p className="text-gray-600 text-lg leading-relaxed mb-8">
+                {t('about.intro.description')}
+              </p>
+              <p className="text-gray-600 text-lg leading-relaxed">
+                {t('about.intro.tech')}
+              </p>
+            </div>
+            <div className="relative h-[400px] rounded-lg overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1516321497487-e288fb19713f"
+                alt="Software Development"
+                className="w-full h-full object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>
 
       {/* Travel Section */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="prose prose-lg mx-auto">
-            <h2 className="text-4xl font-serif mb-8 text-center">{t('about.travel.title')}</h2>
-            <p className="text-gray-600 text-lg leading-relaxed mb-8">
+      <section className="relative py-20">
+        <div className="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1501785888041-af3ef285b470"
+            alt="Travel Background"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/70"></div>
+        </div>
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="prose prose-lg mx-auto prose-invert">
+            <h2 className="text-4xl font-serif mb-8 text-center text-white">{t('about.travel.title')}</h2>
+            <p className="text-gray-300 text-lg leading-relaxed mb-8">
               {t('about.travel.perspective')}
             </p>
-            <p className="text-gray-600 text-lg leading-relaxed mb-8">
+            <p className="text-gray-300 text-lg leading-relaxed mb-8">
               {t('about.travel.nature')}
             </p>
-            <p className="text-gray-600 text-lg leading-relaxed">
+            <p className="text-gray-300 text-lg leading-relaxed">
               {t('about.travel.discovery')}
             </p>
           </div>
@@ -63,24 +80,41 @@ const About = () => {
 
       {/* Interests Section */}
       <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="prose prose-lg mx-auto">
-            <h2 className="text-4xl font-serif mb-8 text-center">{t('about.interests.title')}</h2>
-            <p className="text-gray-600 text-lg leading-relaxed mb-8">
-              {t('about.interests.philosophy')}
-            </p>
-            <p className="text-gray-600 text-lg leading-relaxed">
-              {t('about.interests.activities')}
-            </p>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <div className="relative h-[400px] rounded-lg overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1506126613408-eca07ce68773"
+                alt="Philosophy and Nature"
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="prose prose-lg">
+              <h2 className="text-4xl font-serif mb-8">{t('about.interests.title')}</h2>
+              <p className="text-gray-600 text-lg leading-relaxed mb-8">
+                {t('about.interests.philosophy')}
+              </p>
+              <p className="text-gray-600 text-lg leading-relaxed">
+                {t('about.interests.activities')}
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Blog Section */}
-      <section className="py-20 bg-black text-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative py-20">
+        <div className="absolute inset-0">
+          <img
+            src="https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d"
+            alt="Writing Background"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/80"></div>
+        </div>
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="prose prose-lg mx-auto prose-invert">
-            <h2 className="text-4xl font-serif mb-8 text-center">{t('about.blog.title')}</h2>
+            <h2 className="text-4xl font-serif mb-8 text-center text-white">{t('about.blog.title')}</h2>
             <p className="text-gray-300 text-lg leading-relaxed mb-8">
               {t('about.blog.description')}
             </p>
@@ -93,8 +127,6 @@ const About = () => {
           </div>
         </div>
       </section>
-
-    
     </MainLayout>
   );
 };
