@@ -4,7 +4,7 @@ export const translations = {
       about: "HAKKINDA",
       explore: "KEŞFET",
       journal: "GÜNLÜK",
-      search: "ARA"
+      portfolio: "PORTFOLİO"
     },
     hero: {
       title: "Büyük Doğa",
@@ -109,7 +109,7 @@ export const translations = {
         about: "HAKKINDA",
         explore: "KEŞFET",
         journal: "GÜNLÜK",
-        search: "ARA"
+        portfolio: "PORTFOLİO"
       }
     }
   },
@@ -118,7 +118,7 @@ export const translations = {
       about: "ABOUT",
       explore: "EXPLORE",
       journal: "JOURNAL",
-      search: "SEARCH"
+      portfolio: "PORTFOLIO"
     },
     hero: {
       title: "The Great Outdoors",
@@ -223,7 +223,7 @@ export const translations = {
         about: "ABOUT",
         explore: "EXPLORE",
         journal: "JOURNAL",
-        search: "SEARCH"
+        portfolio: "PORTFOLIO"
       }
     }
   }

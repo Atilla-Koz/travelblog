@@ -1,66 +1,54 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import MainLayout from '../layouts/MainLayout';
-
-const destinations = [
-  {
-    id: 1,
-    title: 'Swiss Alps',
-    location: 'Switzerland',
-    image: 'https://images.unsplash.com/photo-1531366936337-7c912a4589a7',
-    category: 'Mountains',
-  },
-  {
-    id: 2,
-    title: 'Santorini',
-    location: 'Greece',
-    image: 'https://images.unsplash.com/photo-1613395877344-13d4a8e0d49e',
-    category: 'Islands',
-  },
-  {
-    id: 3,
-    title: 'Amazon Rainforest',
-    location: 'Brazil',
-    image: 'https://images.unsplash.com/photo-1516908205727-40afad9449a8',
-    category: 'Nature',
-  },
-  // Daha fazla destinasyon eklenebilir
-];
+import LanguageToggle from '../components/LanguageToggle';
+import { useLanguage } from '../context/LanguageContext';
 
 const categories = ['All', 'Mountains', 'Islands', 'Nature', 'Cities'];
 
 const Explore = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const { t } = useLanguage();
+  const locations = t('explore.locations');
 
-  const filteredDestinations = selectedCategory === 'All'
-    ? destinations
-    : destinations.filter(dest => dest.category === selectedCategory);
+  const filteredLocations = selectedCategory === 'All'
+    ? locations
+    : locations.filter(loc => loc.category === selectedCategory);
 
   return (
     <MainLayout>
-      <div className="pt-20">
+      {/* Language Toggle */}
+      <LanguageToggle />
+      
+      <div>
         {/* Hero Section */}
-        <div className="relative h-[40vh] bg-gray-900">
+        <div className="relative h-screen">
           <img
             src="https://images.unsplash.com/photo-1488085061387-422e29b40080"
             alt="Explore"
-            className="w-full h-full object-cover opacity-50"
+            className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 flex flex-col items-center justify-center">
-            <h1 className="text-5xl font-serif text-white mb-4">Explore</h1>
-            <p className="text-xl text-white">Discover amazing destinations</p>
+          <div className="absolute inset-0 bg-black/50">
+            <div className="h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-center">
+              <h1 className="text-4xl md:text-6xl lg:text-7xl font-serif text-white mb-6 max-w-4xl">
+                {t('explore.title')}
+              </h1>
+              <p className="text-lg md:text-xl text-white/90 max-w-2xl leading-relaxed">
+                {t('explore.description')}
+              </p>
+            </div>
           </div>
         </div>
 
         {/* Filters */}
-        <div className="max-w-7xl mx-auto px-4 py-8">
-          <div className="flex justify-center space-x-4 mb-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="flex flex-wrap justify-center gap-4 mb-16">
             {categories.map(category => (
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-6 py-2 rounded-full ${
+                className={`px-6 py-3 rounded-full text-sm font-medium tracking-wide transition-all duration-300 ${
                   selectedCategory === category
-                    ? 'bg-blue-600 text-white'
+                    ? 'bg-black text-white shadow-lg'
                     : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
                 }`}
               >
@@ -71,22 +59,27 @@ const Explore = () => {
 
           {/* Destinations Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredDestinations.map(destination => (
+            {filteredLocations.map((location, index) => (
               <div
-                key={destination.id}
-                className="group relative overflow-hidden rounded-lg shadow-lg cursor-pointer"
+                key={index}
+                className="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer aspect-[4/5]"
               >
                 <img
-                  src={destination.image}
-                  alt={destination.title}
-                  className="w-full h-80 object-cover transform group-hover:scale-110 transition-transform duration-500"
+                  src={location.image}
+                  alt={location.title}
+                  className="absolute inset-0 w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent">
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <h3 className="text-xl text-white font-semibold mb-2">
-                      {destination.title}
-                    </h3>
-                    <p className="text-gray-200">{destination.location}</p>
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent">
+                  <div className="absolute bottom-0 left-0 right-0 p-8">
+                    <div className="space-y-4">
+                      <div className="text-white/70 text-sm tracking-wider">
+                        {location.location}
+                      </div>
+                      <h3 className="text-2xl text-white font-light">
+                        {location.title}
+                      </h3>
+                      <div className="h-1 w-12 bg-white/30 group-hover:w-24 transition-all duration-300"></div>
+                    </div>
                   </div>
                 </div>
               </div>

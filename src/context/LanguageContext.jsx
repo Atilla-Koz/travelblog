@@ -1,11 +1,19 @@
-import React, { createContext, useState, useContext } from 'react';
+import { createContext, useState, useContext, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { translations } from '../constants/translations';
 
 const LanguageContext = createContext();
 
 export const LanguageProvider = ({ children }) => {
-  const [language, setLanguage] = useState('tr');
+  const [language, setLanguage] = useState(() => {
+    // localStorage'dan dil tercihini al, yoksa varsayılan olarak 'tr' kullan
+    return localStorage.getItem('language') || 'tr';
+  });
+
+  // Dil değiştiğinde localStorage'a kaydet
+  useEffect(() => {
+    localStorage.setItem('language', language);
+  }, [language]);
 
   const toggleLanguage = () => {
     setLanguage(prev => prev === 'tr' ? 'en' : 'tr');
