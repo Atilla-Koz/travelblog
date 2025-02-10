@@ -4,6 +4,12 @@ import { translations } from '../constants/translations';
 
 const LanguageContext = createContext();
 
+// Dizi kontrolü için yardımcı fonksiyon
+const isArrayPath = (path) => {
+  const arrayPaths = ['explore.locations', 'journal.posts'];
+  return arrayPaths.includes(path);
+};
+
 export const LanguageProvider = ({ children }) => {
   const [language, setLanguage] = useState(() => {
     // localStorage'dan dil tercihini al, yoksa varsayılan olarak 'tr' kullan
@@ -20,14 +26,55 @@ export const LanguageProvider = ({ children }) => {
   };
 
   const t = (key) => {
-    const keys = key.split('.');
-    let value = translations[language];
-    
-    for (const k of keys) {
-      value = value[k];
+    try {
+      const keys = key.split('.');
+      let value = translations[language];
+      
+      // Eğer dizi beklenen bir yol ise ve değer bulunamadıysa boş dizi döndür
+      if (isArrayPath(key)) {
+        let arrayValue = value;
+        for (const k of keys) {
+          if (!arrayValue) break;
+          arrayValue = arrayValue[k];
+        }
+        return Array.isArray(arrayValue) ? arrayValue : [];
+      }
+
+      // Normal değer kontrolü
+      for (const k of keys) {
+        if (!value || (typeof value !== 'object' && !Array.isArray(value))) {
+          // Diğer dildeki değeri kontrol et
+          const otherLang = language === 'tr' ? 'en' : 'tr';
+          let otherValue = translations[otherLang];
+          
+          for (const key of keys) {
+            if (!otherValue) break;
+            otherValue = otherValue[key];
+          }
+          
+          return otherValue || key;
+        }
+        value = value[k];
+      }
+      
+      if (value === undefined || value === null) {
+        // Diğer dildeki değeri kontrol et
+        const otherLang = language === 'tr' ? 'en' : 'tr';
+        let otherValue = translations[otherLang];
+        
+        for (const k of keys) {
+          if (!otherValue) break;
+          otherValue = otherValue[k];
+        }
+        
+        return otherValue || key;
+      }
+      
+      return value;
+    } catch (error) {
+      console.warn(`Error getting translation for key: ${key}`, error);
+      return isArrayPath(key) ? [] : key;
     }
-    
-    return value;
   };
 
   return (
